@@ -54,6 +54,26 @@ function App() {
   setStatus(newStatus);
   }
 
+  const configureBtn = (event) => {
+
+    event.preventDefault();
+    const action = event.target.name;
+    
+    const newStatus = status.map((service) => {
+
+      if(service.name === "web" && ((action ==="plusPg")||(action ==="plusLg"))){
+        action === "plusPg" ? service.pages++ : service.idiom++;  
+      } else if(service.name === "web" && ((action ==="reducePg")||(action ==="reduceLg"))){
+        if((service.idiom&&service.pages)>0){
+          action === "reducePg" ? service.pages-- : service.idiom--;  
+        }
+      }
+
+      return service
+    } )  
+  setStatus(newStatus);
+  }
+
   useEffect(()=>{
     
     const total= status.reduce((acc,state) => {
@@ -76,12 +96,12 @@ function App() {
   return (
     <>
       <p>¿Que vols fer?</p>
-      <form action="">
+      <form >
         <div>
         <Check name="web" price={500} checked onChange={selectService}></Check>
         <label>Una pàgina web (500€)</label>
         </div>
-        <Panel webCheck={webConf} func={configureWeb}></Panel>
+        <Panel webCheck={webConf} func={configureWeb} funcBtn={configureBtn} pages={status[0].pages} idioms={status[0].idiom}></Panel>
         <div>
         <Check name="seo" price={300} checked onChange={selectService}></Check>
         <label>Una consultoria SEO (300€)</label>
