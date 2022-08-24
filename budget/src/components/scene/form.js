@@ -4,7 +4,7 @@ const Check = props => <input
     type="checkbox" 
     name={props.name} 
     value={props.value} 
-    checked={props.check}
+    checked={props.checked}
     onChange={props.onChange} 
     ></input>
 

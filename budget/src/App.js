@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react';
 
 function App() {
 
-  const [webConf,setWeb]=useState(false);
   const [price,setPrice]= useState(0);
-  const [status,setStatus]= useState([
-  {name:"web", value: 500, check: false, pages: 0, idiom: 0},
+  const [status,setStatus]= useState(
+    JSON.parse(localStorage.getItem(`data`))||
+  [{name:"web", value: 500, check: false, pages: 0, idiom: 0},
   {name:"seo", value: 300, check: false},
   {name:"ads", value: 200, check: false}]);
   
@@ -19,17 +19,9 @@ function App() {
     const newStatus = status.map( (service) =>{
       
       if (target.name === service.name && target.checked === true){
-        service.check =true; 
-        if(target.name === "web"){
-          setWeb(true);
-        }
-
+        service.check =true;  
       } else if( target.name === service.name && target.checked === false ){
         service.check = false;
-        if(target.name === "web"){
-          setWeb(false);
-        }
-
       } 
       
       return service;
@@ -64,11 +56,12 @@ function App() {
       if(service.name === "web" && ((action ==="plusPg")||(action ==="plusLg"))){
         action === "plusPg" ? service.pages++ : service.idiom++;  
       } else if(service.name === "web" && ((action ==="reducePg")||(action ==="reduceLg"))){
-        if((service.idiom&&service.pages)>0){
-          action === "reducePg" ? service.pages-- : service.idiom--;  
+        if((service.pages&&action === "reducePg")>0){
+          service.pages--;  
+        } else if((service.idiom&&action === "reduceLg")>0){
+          service.idiom--;
         }
       }
-
       return service
     } )  
   setStatus(newStatus);
@@ -91,29 +84,33 @@ function App() {
     },0)
     
     setPrice(total);
+    localStorage.setItem(`data`, JSON.stringify(status))
+    
   },[status]) 
+
 
   return (
     <>
       <p>¿Que vols fer?</p>
       <form >
         <div>
-        <Check name="web" price={500} checked onChange={selectService}></Check>
+        <Check name="web" price={500} checked={status[0].check} onChange={selectService}></Check>
         <label>Una pàgina web (500€)</label>
         </div>
-        <Panel webCheck={webConf} func={configureWeb} funcBtn={configureBtn} pages={status[0].pages} idioms={status[0].idiom}></Panel>
+        <Panel webCheck={status[0].check} func={configureWeb} funcBtn={configureBtn} pages={status[0].pages} idioms={status[0].idiom}></Panel>
         <div>
-        <Check name="seo" price={300} checked onChange={selectService}></Check>
+        <Check name="seo" price={300} checked={status[1].check} onChange={selectService}></Check>
         <label>Una consultoria SEO (300€)</label>
         </div>
         <div>
-        <Check name="ads" price={200} checked onChange={selectService}></Check>
+        <Check name="ads" price={200} checked={status[2].check} onChange={selectService}></Check>
         <label>Una campaña de Google Ads (200€)</label>
         </div>
       </form>
       <div>
         <p>El seu pressupost és:</p>
         <p>{price}</p>
+        
       </div>
     </>
   );
