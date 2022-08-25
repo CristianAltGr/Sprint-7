@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Check from './components/scene/form';
 import Panel from './components/scene/panel';

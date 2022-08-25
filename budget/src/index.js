@@ -1,13 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css';
 import App from './App';
+import Welcome from './components/scene/Welcome';
+
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+     <BrowserRouter>
+        <Routes>
+            <Route  path="budget" element= {<App></App>}/>
+            <Route  index element={<Welcome/>}/>
+        </Routes>
+    </BrowserRouter>
+   
   </React.StrictMode>
 );
 
