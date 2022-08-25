@@ -3,6 +3,7 @@ import './App.css';
 import Check from './components/scene/form';
 import Panel from './components/scene/panel';
 import { useEffect, useState } from 'react';
+import { GlobalStyle, PanelInput , Body } from './components/styles';
 
 function App() {
 
@@ -56,9 +57,9 @@ function App() {
       if(service.name === "web" && ((action ==="plusPg")||(action ==="plusLg"))){
         action === "plusPg" ? service.pages++ : service.idiom++;  
       } else if(service.name === "web" && ((action ==="reducePg")||(action ==="reduceLg"))){
-        if((service.pages&&action === "reducePg")>0){
+        if(service.pages>0 && action === "reducePg"){
           service.pages--;  
-        } else if((service.idiom&&action === "reduceLg")>0){
+        } else if(service.idiom>0 &&action === "reduceLg"){
           service.idiom--;
         }
       }
@@ -90,29 +91,31 @@ function App() {
 
 
   return (
-    <>
+    
+    <Body>
+      <GlobalStyle/>
       <p>¿Que vols fer?</p>
       <form >
-        <div>
+        <PanelInput>
         <Check name="web" price={500} checked={status[0].check} onChange={selectService}></Check>
-        <label>Una pàgina web (500€)</label>
-        </div>
+        <label><p>Una pàgina web (500€)</p></label>
+        </PanelInput>
         <Panel webCheck={status[0].check} func={configureWeb} funcBtn={configureBtn} pages={status[0].pages} idioms={status[0].idiom}></Panel>
-        <div>
+        <PanelInput>
         <Check name="seo" price={300} checked={status[1].check} onChange={selectService}></Check>
-        <label>Una consultoria SEO (300€)</label>
-        </div>
-        <div>
+        <label><p>Una consultoria SEO (300€)</p></label>
+        </PanelInput>
+        <PanelInput>
         <Check name="ads" price={200} checked={status[2].check} onChange={selectService}></Check>
-        <label>Una campaña de Google Ads (200€)</label>
-        </div>
+        <label><p>Una campaña de Google Ads (200€)</p></label>
+        </PanelInput>
       </form>
       <div>
         <p>El seu pressupost és:</p>
-        <p>{price}</p>
+        <p>{price}€</p>
         
       </div>
-    </>
+    </Body>
   );
 }
 
