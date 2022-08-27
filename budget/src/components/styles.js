@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
        
     }
 `
+
 export const Body = styled.div`
     margin-left: 2vh;
 `
@@ -16,7 +17,7 @@ export const Body = styled.div`
 export const PanelS = styled.div` 
     margin-top: 2vh;
     margin-bottom: 2vh;
-    margin-right: 55%;
+    margin-right: 65%;
     padding: 2vh;
     border: 4px solid black;
     border-radius: 60px;
@@ -46,18 +47,50 @@ export const InputS = styled.div`
         text-align: center;
         border: none;
     }
-    button{
-        font-size: 3vh;
+   
+`
+export const ButtonS = styled.button`
+ font-size: 3vh;
         font-weight: bold;
         color: white;
         border: none;
         border-radius: 8px;
         background-color: #fd5716;
-    }
 `
 
 export const InputX = styled.input`
     width: 2vh;
     height: 2vh;
 `
+export const Info = styled.button`
+    background-color: grey;
+    color: white;
+    padding-left: 10px;
+    border-radius: 33px;
+    width: 2vh;
+    height: 2vh;
+    border: none;
+`
+export const PopBg = styled.div`
+    position: absolute;
+    z-index: 1;
+    background-color: #80808075;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
 
+    .containerPop{
+        position: absolute;
+        left: 65vh;
+        top:65vh;
+        padding: 3vh;
+        background-color: white;
+        border: 6px solid black;
+        border-radius: 60px;
+    }
+`
+
+export const Hero = styled.div`
+    font-size: 2vh;
+`
