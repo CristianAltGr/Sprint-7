@@ -4,10 +4,11 @@ import { InfoList, ListS, ButList, InputList } from "../styles";
 
 const List = (props) =>{
  
-  const [budgets,setBudgets]=useState(props.list)
+  const [budgets,setBudgets]=useState(props.list);
   
   useEffect(()=>{
     setBudgets(props.list);
+    localStorage.setItem(`list`, JSON.stringify(props.list))
   },[props.list])
   
   const orderByName = () => {
@@ -46,7 +47,8 @@ const List = (props) =>{
       <ButList className="buttonsList">
         <button onClick={orderByName}>Ordena alfabèticament</button>
         <button onClick={orderByDate}>Ordena els més recents</button>
-        <button onClick={orderRestart}>Restablir el ordre</button>
+        <button onClick={orderRestart}>Restablir l'ordre</button>
+        <button onClick={props.onClick}>Eliminar</button>
       </ButList>
       <div>
         { budgets.map(bud=>{

@@ -154,7 +154,7 @@ export const ButList = styled.div`
     margin-top: 2vh;
 
     button{
-        width: 30vh;
+        width: 23vh;
         height: 7vh;
         font-size: 1.7em;
         border-radius: 10px;

@@ -19,7 +19,7 @@ function App() {
   {name:"ads", value: 200, check: false}]);
   const [nameUser, setName]= useState("");
   const [nameBudget, setBudget]= useState("");
-  const [listBudget,setList]=useState([]);
+  const [listBudget,setList]=useState(JSON.parse(localStorage.getItem(`list`))||[]);
   
   const selectService = (event) => {
 
@@ -93,6 +93,10 @@ function App() {
     setList([...listBudget,budgetObj]);
   }
 
+  const deleteList = () => {
+    setList([]);
+  }
+
   useEffect(()=>{
     
     const total= status.reduce((acc,state) => {
@@ -143,7 +147,7 @@ function App() {
           </div>
           <SavedInput onClick={BudgetList} onChange={configBudget}/>
         </div>
-        <List list={listBudget}></List>
+        <List list={listBudget} onClick={deleteList}></List>
       </Contain>
     </>
   );
