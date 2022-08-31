@@ -133,6 +133,21 @@ export const InputBudget = styled.div`
 export const ListS = styled.div`
     background-color: #f5b8688d;   
 `
+
+export const InputList = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 2vh;
+
+    input{
+        width: 80%;
+        height: 4vh;
+        font-size: 1.7em;
+        text-align: center;
+        border-radius: 10px;
+    }
+`
+
 export const ButList = styled.div`
     display: flex;
     justify-content: space-around;

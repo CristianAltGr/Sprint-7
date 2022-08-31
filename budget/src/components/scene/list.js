@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { InfoList, ListS, ButList } from "../styles";
+import { InfoList, ListS, ButList, InputList } from "../styles";
 
 
 const List = (props) =>{
@@ -26,9 +26,23 @@ const List = (props) =>{
     setBudgets(props.list); // This function and orderByDate results at the same.
   }
 
+  const searchBudget = (event) => {
+    const search = event.target.value;
+
+    if(search=== ""){
+      setBudgets(props.list);
+    }else{
+      const found = props.list.filter( budget => (budget.name.startsWith(search)))
+      setBudgets(found);
+    }
+  }
+
   return(
     
     <ListS className="ListSection">
+      <InputList className="searchBudgets">
+        <input type="text" placeholder="Busca el pressupost pel nom" onChange={searchBudget}/>
+      </InputList>
       <ButList className="buttonsList">
         <button onClick={orderByName}>Ordena alfabèticament</button>
         <button onClick={orderByDate}>Ordena els més recents</button>
