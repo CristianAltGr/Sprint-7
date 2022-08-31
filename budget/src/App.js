@@ -3,7 +3,11 @@ import './App.css';
 import Check from './components/scene/form';
 import Panel from './components/scene/panel';
 import { useEffect, useState } from 'react';
-import { GlobalStyle, PanelInput , Body } from './components/styles';
+import { GlobalStyle, PanelInput} from './components/styles';
+import SavedInput from './components/scene/saveBudget';
+import Budget from './components/scene/ClassBuget';
+import List from './components/scene/list';
+import { Contain } from './components/styles';
 
 function App() {
 
@@ -13,6 +17,9 @@ function App() {
   [{name:"web", value: 500, check: false, pages: 0, idiom: 0},
   {name:"seo", value: 300, check: false},
   {name:"ads", value: 200, check: false}]);
+  const [nameUser, setName]= useState("");
+  const [nameBudget, setBudget]= useState("");
+  const [listBudget,setList]=useState([]);
   
   const selectService = (event) => {
 
@@ -68,6 +75,24 @@ function App() {
   setStatus(newStatus);
   }
 
+  const configBudget = (event) => {
+    const element = event.target;
+    
+    if (element.className === "nameBudget"){
+      setBudget(element.value);  
+    } else if(element.className === "user"){
+      setName(element.value);
+    }
+}
+
+  const BudgetList = (event) => {
+    event.preventDefault();
+    const date = new Date().toLocaleString();
+    const budgetObj = new Budget(nameBudget,nameUser,status[0].check,status[0].pages,status[0].idiom,status[1].check,status[2].check,price,date);
+    
+    setList([...listBudget,budgetObj]);
+  }
+
   useEffect(()=>{
     
     const total= status.reduce((acc,state) => {
@@ -92,30 +117,35 @@ function App() {
 
   return (
     
-    <Body>
+    <>
       <GlobalStyle/>
-      <p>¿Que vols fer?</p>
-      <form >
-        <PanelInput>
-        <Check name="web" price={500} checked={status[0].check} onChange={selectService}></Check>
-        <label><p>Una pàgina web (500€)</p></label>
-        </PanelInput>
-        <Panel webCheck={status[0].check} func={configureWeb} funcBtn={configureBtn} pages={status[0].pages} idioms={status[0].idiom}></Panel>
-        <PanelInput>
-        <Check name="seo" price={300} checked={status[1].check} onChange={selectService}></Check>
-        <label><p>Una consultoria SEO (300€)</p></label>
-        </PanelInput>
-        <PanelInput>
-        <Check name="ads" price={200} checked={status[2].check} onChange={selectService}></Check>
-        <label><p>Una campaña de Google Ads (200€)</p></label>
-        </PanelInput>
-      </form>
-      <div>
-        <p>El seu pressupost és:</p>
-        <p>{price}€</p>
-        
-      </div>
-    </Body>
+      <Contain className="container">
+        <div className="interface">
+          <h3>¿Que vols fer?</h3>
+          <form >
+            <PanelInput>
+              <Check name="web" price={500} checked={status[0].check} onChange={selectService}></Check>
+              <label><p>Una pàgina web (500€)</p></label>
+            </PanelInput>
+              <Panel webCheck={status[0].check} func={configureWeb} funcBtn={configureBtn} pages={status[0].pages} idioms={status[0].idiom}></Panel>
+            <PanelInput>
+              <Check name="seo" price={300} checked={status[1].check} onChange={selectService}></Check>
+              <label><p>Una consultoria SEO (300€)</p></label>
+            </PanelInput>
+            <PanelInput>
+              <Check name="ads" price={200} checked={status[2].check} onChange={selectService}></Check>
+              <label><p>Una campaña de Google Ads (200€)</p></label>
+            </PanelInput>
+          </form>
+          <div>
+            <p>El seu pressupost és:</p>
+            <p>{price}€</p>          
+          </div>
+          <SavedInput onClick={BudgetList} onChange={configBudget}/>
+        </div>
+        <List list={listBudget}></List>
+      </Contain>
+    </>
   );
 }
 

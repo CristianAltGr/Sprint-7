@@ -3,6 +3,10 @@ import styled,{createGlobalStyle} from "styled-components";
 export const GlobalStyle = createGlobalStyle`
 
     *{
+        h3{
+            font-size: 2em;
+        }
+
         p{
             font-size: 2em;
         }
@@ -10,14 +14,16 @@ export const GlobalStyle = createGlobalStyle`
     }
 `
 
-export const Body = styled.div`
+export const Contain = styled.div`
     margin-left: 2vh;
+    display: grid;
+    grid-template-columns: 40% 60%;
 `
 
 export const PanelS = styled.div` 
     margin-top: 2vh;
     margin-bottom: 2vh;
-    margin-right: 65%;
+    margin-right: 10%;
     padding: 2vh;
     border: 4px solid black;
     border-radius: 60px;
@@ -93,4 +99,38 @@ export const PopBg = styled.div`
 
 export const Hero = styled.div`
     font-size: 2vh;
+`
+
+export const InputBudget = styled.div`
+    
+    display: flex;
+    flex-direction: column;
+    
+    input{
+        margin: 15px;
+        width: 15em;
+        height: 2.5em;
+        font-size: 2em;
+        text-align: center;
+    }
+    button{
+        border-radius: 30px;
+        width: 30vh;
+        height: 8vh;
+        font-size: 2em;
+        margin-left: 25vh;
+
+        :hover{
+            background-color: #fd5716;
+            transition: 2s;
+            opacity: 80%;
+        }
+        
+    }
+`
+
+export const ListS = styled.div`
+
+    background-color: coral;
+   
 `
