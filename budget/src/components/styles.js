@@ -123,7 +123,7 @@ export const InputBudget = styled.div`
         :hover{
             background-color: #fd5716;
             color:white;
-            transition: 1s;
+            transition: 0.5s;
             opacity: 91%;
         }
         
