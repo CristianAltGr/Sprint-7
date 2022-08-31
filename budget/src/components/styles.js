@@ -122,15 +122,39 @@ export const InputBudget = styled.div`
 
         :hover{
             background-color: #fd5716;
-            transition: 2s;
-            opacity: 80%;
+            color:white;
+            transition: 1s;
+            opacity: 91%;
         }
         
     }
 `
 
 export const ListS = styled.div`
+    background-color: #f5b8688d;   
+`
+export const ButList = styled.div`
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2vh;
 
-    background-color: coral;
-   
+    button{
+        width: 30vh;
+        height: 7vh;
+        font-size: 1.7em;
+        border-radius: 10px;
+        
+        :hover{
+            background-color: #fd5716;
+            color: white;
+        }
+    }
+`
+
+export const InfoList = styled.div`
+    background-color: #c8ffbb;
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid black;
+    margin: 10px;
 `

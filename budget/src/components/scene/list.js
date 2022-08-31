@@ -1,20 +1,32 @@
-import React, { useEffect,useState } from "react";
-import { ListS } from "../styles";
+import React from "react";
+import { InfoList, ListS, ButList } from "../styles";
 
 
 const List = (props) =>{
  
+  
  
   return(
-    <ListS>
-       { props.list.map(bud=>{
-        return(
-         <p key={bud.date + " " + bud.name}>
-          Fac. {bud.name} Cli. {bud.user}  {bud.price}€ 
-          web={bud.web ? "yes":"no"} nºpg {bud.pg} nºlg {bud.lgs}  
-          seo={bud.seo ? "yes":"no"} ads={bud.ads ? "yes":"no"} data={bud.date}</p> 
-        )
-       })}
+    
+    <ListS className="ListSection">
+      <ButList className="buttonsList">
+        <button>Ordena alfabèticament</button>
+        <button>Ordena els més recents</button>
+        <button>Restablir el ordre</button>
+      </ButList>
+      <div>
+        { props.list.map(bud=>{
+          return(
+            <InfoList key={bud.date + " " + bud.name}>
+              <p>Fac: {bud.name} Cli: {bud.user}  Preu: {bud.price}€</p>
+              <p>Web:  {bud.web ? "yes":"no"}  Nºpg: {bud.pg}  Nºlg: {bud.lgs}</p>  
+              <p>Seo: {bud.seo ? "yes":"no"}</p>
+              <p>Ads: {bud.ads ? "yes":"no"}</p> 
+              <p>Data: {bud.date}</p>
+            </InfoList> 
+          )
+        })}
+      </div>
     </ListS>
   )
 }
