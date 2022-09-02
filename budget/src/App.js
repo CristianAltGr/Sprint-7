@@ -8,12 +8,43 @@ import SavedInput from './components/scene/saveBudget';
 import Budget from './components/scene/ClassBuget';
 import List from './components/scene/list';
 import { Contain } from './components/styles';
+import { useLocation, useSearchParams } from 'react-router-dom';
+
+
 
 function App() {
 
+  // exercice 11
+  const {search} = useLocation();
+  const query = new URLSearchParams(search);
+  const web = query.get("web");
+  const pag = query.get("pag");
+  const idiom = query.get("idiom");
+  const seo = query.get("seo");
+  const ads = query.get("ads");
+  const [Params,setParams] = useSearchParams(); 
+  
+  //I do this before whit useLocation and knew useHistory was deprecated jeje because this i search more and
+  //found useSearchParams
+  let attrURL;
+  
+  
+  if((web===null||web==="")||(pag===null||pag==="")||(idiom===null||idiom==="")||(seo===null||seo==="")||(ads===null||ads==="")){
+    attrURL = null;
+  }else{
+    attrURL = 
+    [{name:"web", value: 500, check: web==="true" ? true : false , pages: parseInt(pag), idiom: parseInt(idiom)},
+    {name:"seo", value: 300, check: seo==="true" ? true : false},
+    {name:"ads", value: 200, check: ads==="true" ? true : false}]
+  } 
+
+//For next projects i will think about control of params input, at the browser because you can write another values
+  
+// init project
+
   const [price,setPrice]= useState(0);
   const [status,setStatus]= useState(
-    JSON.parse(localStorage.getItem(`data`))||
+    attrURL || JSON.parse(localStorage.getItem(`data`))||
   [{name:"web", value: 500, check: false, pages: 0, idiom: 0},
   {name:"seo", value: 300, check: false},
   {name:"ads", value: 200, check: false}]);
@@ -115,7 +146,7 @@ function App() {
     
     setPrice(total);
     localStorage.setItem(`data`, JSON.stringify(status))
-    
+    setParams({web: status[0].check,pag: status[0].pages, idiom: status[0].idiom, ads: status[1].check,seo:status[2].check} )
   },[status]) 
 
 
