@@ -8,27 +8,24 @@ import SavedInput from './components/scene/saveBudget';
 import Budget from './components/scene/ClassBuget';
 import List from './components/scene/list';
 import { Contain } from './components/styles';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 
 
 function App() {
 
   // exercice 11
-  const {search} = useLocation();
-  const query = new URLSearchParams(search);
-  const web = query.get("web");
-  const pag = query.get("pag");
-  const idiom = query.get("idiom");
-  const seo = query.get("seo");
-  const ads = query.get("ads");
-  const [Params,setParams] = useSearchParams(); 
-  
   //I do this before whit useLocation and knew useHistory was deprecated jeje because this i search more and
   //found useSearchParams
+  const [Params,setParams] = useSearchParams(); 
+
+  const web = Params.get("web");
+  const pag = Params.get("pag");
+  const idiom = Params.get("idiom");
+  const seo = Params.get("seo");
+  const ads = Params.get("ads"); 
   let attrURL;
-  
-  
+    
   if((web===null||web==="")||(pag===null||pag==="")||(idiom===null||idiom==="")||(seo===null||seo==="")||(ads===null||ads==="")){
     attrURL = null;
   }else{
