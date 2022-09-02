@@ -142,8 +142,8 @@ function App() {
     },0)
     
     setPrice(total);
+    setParams({web: status[0].check,pag: status[0].pages, idiom: status[0].idiom,seo:status[1].check, ads: status[2].check})
     localStorage.setItem(`data`, JSON.stringify(status))
-    setParams({web: status[0].check,pag: status[0].pages, idiom: status[0].idiom, ads: status[1].check,seo:status[2].check} )
   },[status]) 
 
 
